@@ -5,18 +5,20 @@
 package rest
 
 import (
+	"context"
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"golang.org/x/oauth2"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
 	"time"
-
+	"golang.org/x/oauth2/clientcredentials"
 	"github.com/sirupsen/logrus"
 )
 
@@ -231,10 +233,29 @@ func (cc *clientCredentialAuthPlugin) NewClient(c Config) (*http.Client, error) 
 		return nil, err
 	}
 
-	return defaultRoundTripperClient(t), nil
+	ctx := context.Background()
+	authConfig := &clientcredentials.Config{
+		ClientID: cc.ClientId,
+		ClientSecret: cc.ClientSecret,
+		TokenURL: cc.TokenUrl,
+		Scopes: cc.Scopes,
+	}
+
+	defaultRtClient := defaultRoundTripperClient(t)
+
+	httpClient := &http.Client{
+		Transport: &oauth2.Transport{
+			Source: authConfig.TokenSource(ctx),
+			Base:   defaultRtClient.Transport,
+		},
+	}
+
+	return httpClient, nil
+
+	// return defaultRoundTripperClient(t), nil
 }
 
 func (cc *clientCredentialAuthPlugin) Prepare(req *http.Request) error {
-	req.Header.Add("Authorization", "Haha")
+	// req.Header.Add("Authorization", "Haha")
 	return nil
 }

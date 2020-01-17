@@ -10,7 +10,6 @@ require (
 	github.com/ghodss/yaml v0.0.0-20180820084758-c7ce16629ff4
 	github.com/gobwas/glob v0.2.3
 	github.com/gogo/protobuf v1.3.0 // indirect
-	github.com/golang/protobuf v0.0.0-20181025225059-d3de96c4c28e // indirect
 	github.com/gorilla/mux v0.0.0-20181024020800-521ea7b17d02
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
@@ -30,7 +29,9 @@ require (
 	github.com/spf13/pflag v0.0.0-20181024212040-082b515c9490
 	github.com/yashtewari/glob-intersection v0.0.0-20180916065949-5c77d914dd0b
 	golang.org/x/lint v0.0.0-20181023182221-1baf3a9d7d67
+	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	golang.org/x/tools v0.0.0-20190920225731-5eefd052ad72
+	google.golang.org/genproto v0.0.0-20180831171423-11092d34479b // indirect
 	gopkg.in/fsnotify.v1 v1.4.7
 	gopkg.in/yaml.v2 v2.2.1
 )
