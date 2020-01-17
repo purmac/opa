@@ -217,3 +217,24 @@ func (ap *awsSigningAuthPlugin) Prepare(req *http.Request) error {
 	err := signV4(req, ap.awsCredentialService(), time.Now())
 	return err
 }
+
+type clientCredentialAuthPlugin struct {
+	TokenUrl string `json:"token_url"`
+	ClientId string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	Scopes []string `json:"scopes"`
+}
+
+func (cc *clientCredentialAuthPlugin) NewClient(c Config) (*http.Client, error) {
+	t, err := defaultTLSConfig(c)
+	if err != nil {
+		return nil, err
+	}
+
+	return defaultRoundTripperClient(t), nil
+}
+
+func (cc *clientCredentialAuthPlugin) Prepare(req *http.Request) error {
+	req.Header.Add("Authorization", "Haha")
+	return nil
+}

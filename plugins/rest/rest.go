@@ -39,6 +39,7 @@ type Config struct {
 		Bearer    *bearerAuthPlugin     `json:"bearer,omitempty"`
 		ClientTLS *clientTLSAuthPlugin  `json:"client_tls,omitempty"`
 		S3Signing *awsSigningAuthPlugin `json:"s3_signing,omitempty"`
+		ClientCredential *clientCredentialAuthPlugin `json:"client_credential,omitempty"`
 	} `json:"credentials"`
 }
 
